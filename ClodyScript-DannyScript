@@ -1,0 +1,182 @@
+local P, H, p = game:GetService("Players"), game:GetService("HttpService"), game:GetService("Players").LocalPlayer
+local f, lkt, lkit, likt, i, b, te, la = "/", {}, {}, {}, {}, {}, false, false
+
+local function l() local s, h = pcall(function() return loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/main/WhitelistCheck"))() end) return s, h end
+local s, h = l()
+
+local function lb() local s, r = pcall(function() return H:JSONDecode(readfile("BanPlayer.txt")) end) b = s and r or {} end
+local function sb() writefile("BanPlayer.txt", H:JSONEncode(b)) end
+lb()
+
+local function G() return p.Character:FindFirstChild("F3X") or p.Backpack:FindFirstChild("F3X") or p.Character:FindFirstChild("Building Tools") or p.Backpack:FindFirstChild("Building Tools") end
+local function D(i, T) T:FindFirstChildOfClass("BindableFunction"):FindFirstChildOfClass("RemoteFunction"):InvokeServer("UndoRemove", {i}) end
+local function fP(s) for _, v in pairs(P:GetPlayers()) do if s:lower() == (v.Name:lower()):sub(1, #s) or s:lower() == (v.DisplayName:lower()):sub(1, #s) then return v end end end
+
+local function nK(tP)
+    local T = G()
+    local function Tsk() if tP then D(tP.Character.Torso:FindFirstChild("Neck"), T) end end
+    if T.Parent == p.Backpack then T.Parent = p.Character wait() Tsk() wait() T.Parent = p.Backpack
+    elseif T.Parent == p.Character then Tsk() end
+end
+
+local function lK(tP) while lkt[tP] do nK(tP) wait(1) end end
+local function lIK(tP) while lkit[tP] do tP.Character.ChildAdded:Connect(function(c) if c:IsA("Tool") then nK(tP) end end) wait(1) end end
+local function lIKt(tP) while likt[tP] do tP.Character.ChildAdded:Connect(function(c) if c:IsA("Tool") then local T = G() if T.Parent == p.Backpack then T.Parent = p.Character wait() end D(tP, T) if T.Parent == p.Character then T.Parent = p.Backpack end end end) wait(1) end end
+
+local function sL() for tP in pairs(lkt) do lkt[tP] = nil end end
+local function sLK(tP) lkt[tP] = nil end
+local function sLIK(tP) lkit[tP] = nil end
+local function sLIKt(tP) likt[tP] = nil end
+
+local function mPH() while true do if p.Character and p.Character:FindFirstChild("Humanoid") and p.Character.Humanoid.Health <= 0 then sL() break end wait(1) end end
+coroutine.wrap(mPH)()
+
+local function iP(pN) return table.find(i, pN) ~= nil end
+
+local function rDP(tP)
+    local T = G()
+    while table.find(b, tP.Name) do
+        if T.Parent == p.Backpack then T.Parent = p.Character wait() end
+        D(tP, T)
+        wait(1)
+    end
+    if T.Parent == p.Character then T.Parent = p.Backpack end
+end
+
+local function cIG()
+    local s = Instance.new("ScreenGui", p.PlayerGui)
+    s.Name = "SeeImmuneGUI"
+    local f = Instance.new("Frame", s)
+    f.Size = UDim2.new(1, 0, 1, 0)
+    f.BackgroundTransparency = 0.75
+    f.BackgroundColor3 = Color3.new(0, 1, 0)
+    local c = Instance.new("TextButton", f)
+    c.Size = UDim2.new(0, 100, 0, 50)
+    c.Position = UDim2.new(0, 10, 0, 10)
+    c.Text = "X"
+    c.TextColor3 = Color3.new(1, 0, 0)
+    c.TextScaled = true
+    c.MouseButton1Click:Connect(function() s:Destroy() end)
+    local t = Instance.new("TextLabel", f)
+    t.Size = UDim2.new(1, -20, 1, -70)
+    t.Position = UDim2.new(0, 10, 0, 60)
+    t.TextColor3 = Color3.new(0, 0, 0)
+    t.TextStrokeColor3 = Color3.new(1, 1, 1)
+    t.TextStrokeTransparency = 0
+    t.TextScaled = true
+    t.Text = "Immune Players:\n" .. table.concat(i, "\n") .. "\n"
+end
+
+local function cBG()
+    local s = Instance.new("ScreenGui", p.PlayerGui)
+    s.Name = "SeeBanGUI"
+    local f = Instance.new("Frame", s)
+    f.Size = UDim2.new(1, 0, 1, 0)
+    f.BackgroundTransparency = 0.75
+    f.BackgroundColor3 = Color3.new(1, 0, 0)
+    local c = Instance.new("TextButton", f)
+    c.Size = UDim2.new(0, 100, 0, 50)
+    c.Position = UDim2.new(0, 10, 0, 10)
+    c.Text = "X"
+    c.TextColor3 = Color3.new(1, 1, 1)
+    c.TextScaled = true
+    c.MouseButton1Click:Connect(function() s:Destroy() end)
+    local t = Instance.new("TextLabel", f)
+    t.Size = UDim2.new(1, -20, 1, -70)
+    t.Position = UDim2.new(0, 10, 0, 60)
+    t.TextColor3 = Color3.new(0, 0, 0)
+    t.TextStrokeColor3 = Color3.new(1, 1, 1)
+    t.TextStrokeTransparency = 0
+    t.TextScaled = true
+    t.Text = "Banned Players:\n" .. table.concat(b, ", ")
+end
+
+local function cB(p)
+    if la or table.find(b, p.Name) then
+        local T = G()
+        if T.Parent == p.Backpack then
+            T.Parent = p.Character
+            wait()
+        end
+        D(p, T)
+        if T.Parent == p.Character then T.Parent = p.Backpack end
+    end
+end
+
+P.PlayerAdded:Connect(cB)
+
+local l = false
+
+local function tL() l = not l end
+
+P.PlayerAdded:Connect(function(p)
+    if l then
+        local T = G()
+        if T.Parent == p.Backpack then
+            T.Parent = p.Character
+            wait()
+        end
+        D(p, T)
+        if T.Parent == p.Character then T.Parent = p.Backpack end
+    end
+end)
+
+p.Chatted:Connect(function(m)
+    local a, c, tN = m:split(" "), m:split(" ")[1], m:split(" ")[2]
+    if c == f .. "kill" then
+        if tN == "other" then
+            for _, tP in pairs(P:GetPlayers()) do if tP.Name ~= p.Name and not iP(tP.Name) then nK(tP) end end
+        else
+            local tP = fP(tN)
+            if tP then nK(tP) end
+        end
+    elseif c == f .. "loopkill" then
+        if tN == "other" then
+            for _, tP in pairs(P:GetPlayers()) do if tP.Name ~= p.Name and not iP(tP.Name) then lkt[tP] = true coroutine.wrap(lK)(tP) end end
+        else
+            local tP = fP(tN)
+            if tP then lkt[tP] = true coroutine.wrap(lK)(tP) end
+        end
+    elseif c == f .. "unloopkill" then
+        local tP = fP(tN)
+        if tP then sLK(tP) end
+    elseif c == f .. "immune" then
+        local tP = fP(tN)
+        if tP and not iP(tP.Name) then table.insert(i, tP.Name) end
+    elseif c == f .. "unimmune" then
+        local tP = fP(tN)
+        if tP and iP(tP.Name) then table.remove(i, table.find(i, tP.Name)) end
+    elseif c == f .. "seeban" then cBG()
+    elseif c == f .. "seeimmune" then cIG()
+    elseif c == f .. "ban" then
+        local tP = fP(tN)
+        if tP and not table.find(b, tP.Name) then
+            table.insert(b, tP.Name)
+            sb()
+            rDP(tP)
+        end
+    elseif c == f .. "loopitemkick" then
+        if tN == "other" then
+            for _, p in pairs(P:GetPlayers()) do
+                if p.Name ~= p.Name and not iP(p.Name) then
+                    lkit[p] = true
+                    coroutine.wrap(lIK)(p)
+                end
+            end
+        else
+            local p = fP(tN)
+            if p then
+                lkit[p] = true
+                coroutine.wrap(lIK)(p)
+            end
+        end
+    elseif c == f .. "unloopitemkick" then
+        local p = fP(tN)
+        if p then
+            sLIK(p)
+        end
+    elseif c == f .. "lockdown" then
+        tL()
+        print(l and 'Lockdown enabled.' or 'Lockdown disabled.')
+    end
+end)
