@@ -1,7 +1,15 @@
 local P, H, p = game:GetService("Players"), game:GetService("HttpService"), game:GetService("Players").LocalPlayer
 local f, lkt, lkit, likt, i, b, te, la = "/", {}, {}, {}, {}, {}, false, false
 
-local function l() local s, h = pcall(function() return loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/main/WhitelistCheck"))() end) return s, h end
+local function l()
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/main/WhitelistCheck"))()
+    end)
+    if not success then
+        warn("Error executing loadstring: " .. result)
+    end
+    return success, result
+end
 local s, h = l()
 
 local function lb() local s, r = pcall(function() return H:JSONDecode(readfile("BanPlayer.txt")) end) b = s and r or {} end
