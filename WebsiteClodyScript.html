@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exploit Script</title>
     <link rel="stylesheet" href="styleCS.css">
+    <style>
+        footer p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+        }
+        .newest-command {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -25,15 +36,15 @@
                 <li>/kickAura [on/off]</li>
                 <li>/freeze [name]</li>
             </ul>
-            <h2>Newest Command<h2>
-            </ul>
-                <li>/goto [random, name]</li>
+            <h2 class="newest-command">Newest Command</h2>
+            <ul>
+                <li class="newest-command">/goto [random, name]</li>
             </ul>
             <p>This powerful Lua script is designed to give you full control in the game 'Let's Party Infinite.' You'll have endless opportunities to dominate the party.</p>
         </section>
 
         <footer>
-            <p style="font-size: 12px;">loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/main/ProtectedClodyScript.txt"))()</p>
+            <p>loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/main/ProtectedClodyScript.txt"))()</p>
         </footer>
     </div>
 </body>
