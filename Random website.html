@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clody's Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+        h1 {
+            color: #ffcc00;
+        }
+        button {
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ffaa00;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #00ff00;
+        }
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verification</h1>
+        <p>To prove that you're not a robot, please answer this question made by Clody:</p>
+        <p><strong>2 + 2 = ?</strong></p>
+        <button onclick="checkAnswer('69420')">a. 69420</button>
+        <button onclick="checkAnswer('4')">b. 4</button>
+        <button onclick="checkAnswer('IDK')">c. IDK?</button>
+
+        <div id="response" class="result"></div>
+    </div>
+
+    <script>
+        function checkAnswer(answer) {
+            const responseElement = document.getElementById("response");
+
+            if (answer === '4') {
+                responseElement.innerHTML = 'Here is the InfiniteClodyGui: <code>loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/refs/heads/main/InfiniteClodyGui"))()</code>';
+                responseElement.classList.remove("error");
+                responseElement.classList.add("result");
+            } else {
+                responseElement.innerHTML = 'Incorrect answer. Please try again!';
+                responseElement.classList.remove("result");
+                responseElement.classList.add("error");
+            }
+        }
+    </script>
+</body>
+</html>
