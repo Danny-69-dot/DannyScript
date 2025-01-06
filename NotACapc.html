@@ -47,6 +47,31 @@
         .error {
             color: #ff0000;
         }
+        .code-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #444;
+            border-radius: 10px;
+            border: 1px solid #555;
+            font-family: monospace;
+            font-size: 16px;
+            color: #00ff00;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .copy-btn {
+            background-color: #00cc00;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .copy-btn:hover {
+            background-color: #009900;
+        }
     </style>
 </head>
 <body>
@@ -59,21 +84,41 @@
         <button onclick="checkAnswer('IDK')">c. IDK?</button>
 
         <div id="response" class="result"></div>
+        <div id="codeBox" class="code-box" style="display:none;">
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/refs/heads/main/InfiniteClodyGui"))()
+        </div>
+        <button id="copyBtn" class="copy-btn" style="display:none;" onclick="copyCode()">Copy</button>
     </div>
 
     <script>
         function checkAnswer(answer) {
             const responseElement = document.getElementById("response");
+            const codeBox = document.getElementById("codeBox");
+            const copyBtn = document.getElementById("copyBtn");
 
             if (answer === '4') {
-                responseElement.innerHTML = 'Here is the InfiniteClodyGui: <code>loadstring(game:HttpGet("https://raw.githubusercontent.com/Danny-69-dot/DannyScript/refs/heads/main/InfiniteClodyGui"))()</code>';
+                responseElement.innerHTML = 'Correct! Here is the code:';
                 responseElement.classList.remove("error");
                 responseElement.classList.add("result");
+                codeBox.style.display = "block";
+                copyBtn.style.display = "block";
             } else {
                 responseElement.innerHTML = 'Incorrect answer. Please try again!';
                 responseElement.classList.remove("result");
                 responseElement.classList.add("error");
+                codeBox.style.display = "none";
+                copyBtn.style.display = "none";
             }
+        }
+
+        function copyCode() {
+            const codeBox = document.getElementById("codeBox");
+            const range = document.createRange();
+            range.selectNode(codeBox);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            alert("Code copied to clipboard!");
         }
     </script>
 </body>
